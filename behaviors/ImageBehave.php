@@ -175,7 +175,7 @@ class ImageBehave extends Behavior
      * First image alwats must be main image
      * @return array|yii\db\ActiveRecord[]
      */
-    public function getImages()
+    public function getImages($placeholder=True)
     {
         $finder = $this->getImagesFinder();
 
@@ -189,9 +189,13 @@ class ImageBehave extends Behavior
         $imageQuery->orderBy(['isMain' => SORT_DESC, 'id' => SORT_ASC]);
 
         $imageRecords = $imageQuery->all();
-        if(!$imageRecords){
+        if(!$imageRecords && $placeholder){
             return [$this->getModule()->getPlaceHolder()];
         }
+	elseif(!$placeholder && !$imageRecords)
+	{
+		return [];
+	}
         return $imageRecords;
     }
 
