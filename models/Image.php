@@ -52,7 +52,7 @@ class Image extends \yii\db\ActiveRecord
     public function getUrl($size = false){
         $urlSize = ($size) ? '_'.$size : '';
         $url = Url::toRoute([
-            '/'.$this->getPrimaryKey().'/images/image-by-item-and-alias',
+            'yii2images/images/image-by-item-and-alias',
             'item' => $this->modelName.$this->itemId,
             'dirtyAlias' =>  $this->urlAlias.$urlSize.'.'.$this->getExtension()
         ]);
